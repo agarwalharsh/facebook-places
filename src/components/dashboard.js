@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from "react" ;
 import Logo from './logo';
-import { ACCESS_TOKEN } from '../constant';
+import { ACCESS_TOKEN } from '../utils/constant';
 import SearchResults from './searchResults';
 import { FavouriteLink } from './favouriteLink';
 
@@ -10,7 +10,8 @@ export default class Dashboard extends Component {
 
         this.state = {
             searchString: '',
-            isFetched: false
+            isFetched: false,
+            placesList: []
         };
     }
 
@@ -20,9 +21,18 @@ export default class Dashboard extends Component {
             return response.json();
         })
         .then(response => {
+            const listData = response.data;
+
+            listData && listData.length && listData.sort(function(a, b) {
+                return (
+                    ((b.overall_star_rating || 0) - (a.overall_star_rating || 0)) || 
+                    ((b.rating_count || 0) - (a.rating_count || 0))
+                );
+            });
+
             this.setState({
                 isFetched: true,
-                placesList: response.data
+                placesList: listData
             })
         });
 
@@ -59,7 +69,7 @@ export default class Dashboard extends Component {
                         />
                     </div>
                     <section className="search-content">
-                        {placesList
+                        { placesList.length
                             ? isFetched && placesList.length > 0 
                                 ? (
                                     <div className="results-list">

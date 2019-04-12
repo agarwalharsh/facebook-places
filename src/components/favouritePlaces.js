@@ -7,7 +7,7 @@ export default class FavouritePlaces extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            itemList: ls.get('myfavourites')
+            itemList: ''
         }
         this.handleBackClick = this.handleBackClick.bind(this);
     }
@@ -16,9 +16,14 @@ export default class FavouritePlaces extends Component {
         this.props.history.push('/');
     }
 
+    componentDidMount() {
+        this.setState({
+            itemList: ls.get('myfavourites')
+        })
+    }
+
     render() {
         const itemsList = this.state.itemList;
-        console.log('fav list-', itemsList);
         return (
             <Fragment>
                 <header className="main-head">
@@ -29,9 +34,9 @@ export default class FavouritePlaces extends Component {
                 <section className="results-list fav-content">
                 {
                     itemsList ? (
-                        Object.keys(itemsList).map((key) => {
-                            return <SearchResults itemData={itemsList[key]} key={itemsList[key].id} history={this.props.history}/>
-                        })
+                        Object.keys(itemsList).map((key) => (
+                            <SearchResults itemData={itemsList[key]} key={itemsList[key].id} history={this.props.history}/>
+                        ))
                     ) : (
                         <div>No Favourites to show!</div>
                     )

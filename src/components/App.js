@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import Dashboard from './components/dashboard'
-import PlaceDetails from './components/placeDetail';
-import FavouritePlaces from './components/favouriteDetails';
+import Dashboard from './dashboard'
+import PlaceDetails from './placeDetail';
+import FavouritePlaces from './favouritePlaces';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
 
-import './css/styles.css'
+import '../css/styles.css'
 
 library.add(faStar);
 
@@ -18,8 +18,8 @@ class App extends Component {
           <Route 
             exact 
             path="/" 
-            render={() => (
-              <Dashboard />
+            render={(props) => (
+              <Dashboard {...props}/>
             )
             }
           />
@@ -36,6 +36,12 @@ class App extends Component {
             path="/favourites" 
             render={(props) => (
               <FavouritePlaces {...props}/>
+            )
+            }
+          />
+          <Route 
+            render={() => (
+              <h1>Page Not Found!</h1>
             )
             }
           />

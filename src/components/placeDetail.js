@@ -1,12 +1,11 @@
 import React, { Component, Fragment } from "react" ;
 import Logo from './logo';
-import { ACCESS_TOKEN } from '../constant';
+import { ACCESS_TOKEN } from '../utils/constant';
 import { FavouriteLink } from './favouriteLink';
 
 export default class PlaceDetails extends Component {
     constructor(props) {
         super(props);
-        console.log('Cons props- ', props);
         this.state = {
             detailData: ''
         }
@@ -20,10 +19,11 @@ export default class PlaceDetails extends Component {
             return response.json();
         })
         .then(response => {
-            console.log('Detail Response- ', response);
-            this.setState({
-                detailData: response
-            })
+            if (response.id) {
+                this.setState({
+                    detailData: response
+                })
+            }
         });
     }
 

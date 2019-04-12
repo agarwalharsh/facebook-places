@@ -122,12 +122,6 @@ body {
     flex: 1;
 }
 
-.loader {
-    margin-top: 30px;
-    font-size: 40px;
-    text-align: center;
-}
-
 .detail-wrap {
     text-align: center;
 }
@@ -136,15 +130,6 @@ body {
     margin-top: 40px;
     display: inline-flex;
     flex-direction: column;
-}
-
-.detail-logo {
-    margin-right: 25px;
-}
-
-.detail-title {
-    font-size: 40px;
-    font-weight: bold;
 }
 
 .basic-detail {
